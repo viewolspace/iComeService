@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+
+    <sql id="selectCommon">
+
+			SELECT 	user_id,
+                    user_name,
+                    third_id,
+                    url,
+                    c_time,
+                    status
+
+	</sql>
+
+    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        <selectKey keyProperty="userId" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO icome.user
+        (
+        user_name,
+        third_id,
+        url,
+        c_time,
+        status
+        )
+        VALUES
+        (
+        #{userName},
+        #{thirdId},
+        #{url},
+        #{cTime},
+        #{status}
+        )
+
+    </insert>
+
+    <update id="updateStatus" parameterType="map">
+        update icome.user set status = #{status} where user_id = #{userId}
+    </update>
+
+    <select id="select" parameterType="int" resultType="User">
+        <include refid="selectCommon"/>
+        from icome.user a where user_id = #{userId}
+    </select>
+
+    <select id="selectByThird" parameterType="string" resultType="User">
+        <include refid="selectCommon"/>
+        from icome.user a where third_id = #{thirdId}
+    </select>
+
+
+    <select id="queryUser" parameterType="java.util.HashMap" resultType="User">
+        <include refid="selectCommon"/>
+        FROM icome.user a
+        <where>
+
+
+            <if test="status != null">
+                and status = #{status}
+            </if>
+
+            <if test="lastMaxUid != null">
+                and user_id > #{lastMaxUid}
+            </if>
+
+        </where>
+
+        order by user_Id
+
+    </select>
+
+</mapper>

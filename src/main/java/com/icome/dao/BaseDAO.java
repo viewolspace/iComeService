@@ -14,7 +14,7 @@ public class BaseDAO<T> extends SqlDAO<T> {
         setUseSimpleName(true);
     }
 
-    @Resource(name = "albumSessionFactory")
+    @Resource(name = "icomeSessionFactory")
     @Override
     public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
         super.setSqlSessionFactory(sqlSessionFactory);
