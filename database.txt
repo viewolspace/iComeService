@@ -23,3 +23,16 @@ CREATE TABLE `winners` (
   `c_time` DATETIME DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC
+
+#奖品配置表
+CREATE TABLE `luck` (
+  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT '奖品ID(奖品级别，要保持顺序)',
+  `level_name` varchar(50) NOT NULL DEFAULT '' COMMENT '级别名称 （几等奖）',
+  `prize` varchar(50) NOT NULL DEFAULT '' COMMENT '奖品名称',
+  `luck_num` int(50) NOT NULL DEFAULT '0' COMMENT '奖品数量',
+  `reward_num` int(12) NOT NULL DEFAULT '0' COMMENT '抽取人数',
+  `img` varchar(50) DEFAULT '' COMMENT '奖品图片地址',
+  `status` int(12) NOT NULL DEFAULT '0' COMMENT '奖品状态，0-带抽奖，1-已抽奖，不能重复抽',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`,`status`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='奖品配置表';

@@ -28,6 +28,19 @@ public class UserServiceImplTest extends BaseTestClass {
     }
 
     @Test
+    public void batchSaveUser(){
+        User user =getUser();
+        //往表里加入1000个测试用户
+        for(int i = 1 ; i <= 1000 ; i ++){
+            user.setUserName("张三"+i);
+            user.setThirdId("icome"+i);
+            user.setStatus(0);
+            service.saveUser(user);
+        }
+
+    }
+
+    @Test
     public void updateStatus(){
         service.updateStatus(4, 1);
     }
