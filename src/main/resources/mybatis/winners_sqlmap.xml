@@ -55,4 +55,9 @@
         order by level desc
     </select>
 
+
+    <select id="listByLevel" parameterType="int" resultType="Winners">
+        <include refid="selectCommon"/>
+        FROM icome.winners a where level=#{level}
+    </select>
 </mapper>

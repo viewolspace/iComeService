@@ -38,6 +38,9 @@ public class Luck {
     //创建时间
     private Date createTime;
 
+    //签到人数
+    private int joinNum;
+
     public Luck() {
     }
 
@@ -103,6 +106,14 @@ public class Luck {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public int getJoinNum() {
+        return joinNum;
+    }
+
+    public void setJoinNum(int joinNum) {
+        this.joinNum = joinNum;
     }
 
     @Override

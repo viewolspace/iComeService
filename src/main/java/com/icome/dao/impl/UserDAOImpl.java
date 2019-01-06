@@ -48,4 +48,9 @@ public class UserDAOImpl extends BaseDAO<User> implements IUserDAO  {
     public List<User> queryUser(UserQuery query) {
         return super.findBy("queryUser",query.getMap());
     }
+
+    @Override
+    public int queryTotalNum() {
+        return super.count("queryTotalNum", null);
+    }
 }

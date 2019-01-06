@@ -64,4 +64,9 @@ public class UserServiceImplTest extends BaseTestClass {
         System.out.println(list);
     }
 
+    @Test
+    public void testQueryTotalNum(){
+        int total = service.queryTotalNum();
+        System.out.println(total);
+    }
 }
