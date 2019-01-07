@@ -13,10 +13,10 @@ public class Config {
     @Value("${appId}")
     private String appId;
 
-    @Value("APPsecret")
+    @Value("${APPsecret}")
     private String secret;
 
-    @Value("api")
+    @Value("${api}")
     private String api;
 
     public String getAppId() {

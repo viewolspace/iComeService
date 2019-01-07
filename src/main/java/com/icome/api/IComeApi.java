@@ -9,5 +9,5 @@ public interface IComeApi {
 
     String getToken();
 
-    JSONObject getUserDetail();
+    JSONObject getUserDetail(String ticket);
 }

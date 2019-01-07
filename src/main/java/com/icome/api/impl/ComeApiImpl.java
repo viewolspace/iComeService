@@ -1,8 +1,9 @@
 package com.icome.api.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.icome.web.api.IComeApi;
-import com.icome.web.util.Config;
+import com.icome.api.Config;
+import com.icome.api.IComeApi;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -26,30 +27,65 @@ public class ComeApiImpl implements IComeApi {
     @Resource
     private Config config;
 
+    private String token;
+
+    private long sTime;
+
     @Override
     public String getToken() {
-        String url = config.getApi() + "licensor/access_token";
-        JSONObject json = new JSONObject();
-        json.put("appId",config.getAppId());
-        json.put("appSecret",config.getSecret());
-        String result = httpPostWithJson(json,url);
-        return null;
+        if(token!=null && (System.currentTimeMillis() - sTime)/1000 < 7000){
+            return token;
+        }
+
+        synchronized (this){
+            if(token!=null && (System.currentTimeMillis() - sTime)/1000 < 7000){
+                return token;
+            }
+            String url = config.getApi() + "licensor/access_token";
+            JSONObject json = new JSONObject();
+            json.put("appId",config.getAppId());
+            json.put("appSecret",config.getSecret());
+            String result = httpPostWithJson(json,url);
+            JSONObject json_ret = JSON.parseObject(result);
+            if(json_ret.getIntValue("errno")==0){
+                token =   json_ret.getJSONObject("data").getString("access_token");
+                sTime = System.currentTimeMillis();
+            }else{
+                return null;
+            }
+        }
+        return token;
+
+
     }
 
     @Override
-    public JSONObject getUserDetail() {
-        return null;
+    public JSONObject getUserDetail(String ticket) {
+        String temp_token = this.getToken();
+        String url = config.getApi() + "licensor/userinfo";
+        JSONObject json = new JSONObject();
+        json.put("ticket",ticket);
+        json.put("access_token",temp_token);
+        String result = httpPostWithJson(json,url);
+        JSONObject json_ret = JSON.parseObject(result);
+        if(json_ret.getIntValue("errno")==0){
+            return  json_ret.getJSONObject("data") ;
+
+        }else{
+            return null;
+        }
+
     }
 
 
     // 构建唯一会话Id
-    public static String getSessionId(){
+    public String getSessionId(){
         UUID uuid = UUID.randomUUID();
         String str = uuid.toString();
         return str.substring(0, 8) + str.substring(9, 13) + str.substring(14, 18) + str.substring(19, 23) + str.substring(24);
     }
 
-    public static String httpPostWithJson(JSONObject jsonObj,String url){
+    public String httpPostWithJson(JSONObject jsonObj,String url){
         boolean isSuccess = false;
 
         HttpPost post = null;
@@ -76,9 +112,11 @@ public class ComeApiImpl implements IComeApi {
 
             // 检验返回码
             int statusCode = response.getStatusLine().getStatusCode();
-            if(statusCode != HttpStatus.SC_OK){
+            if(statusCode == HttpStatus.SC_OK){
 
                 String content = EntityUtils.toString(response.getEntity());
+                //{"errno":1150,"data":null,"error":"appId 或 appSecret 错误"}
+
                 return content;
             }
         } catch (Exception e) {
