@@ -15,9 +15,9 @@ public class UserServiceImplTest extends BaseTestClass {
 
     public User getUser(){
         User user = new User();
-        user.setUserName("李四1");
-        user.setThirdId("2222");
-        user.setStatus(0);
+        user.setUserName("王五");
+        user.setThirdId("1112222");
+        user.setStatus(1);
         user.setUrl("https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2411564211,2114787003&fm=173&app=25&f=JPEG?w=218&h=146&s=FEF23DC48E462F5754ECC8830300D0C3");
         return user;
     }
