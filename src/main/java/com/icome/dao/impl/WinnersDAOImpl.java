@@ -29,6 +29,11 @@ public class WinnersDAOImpl extends BaseDAO<Winners> implements IWinnersDAO {
     }
 
     @Override
+    public List<Winners> listByLevel(int level) {
+        return super.findBy("listByLevel", level);
+    }
+
+    @Override
     public Winners getWinners(int userId) {
         return super.findUniqueBy("getWinners",userId);
     }

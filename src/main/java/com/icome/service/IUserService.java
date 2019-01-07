@@ -24,4 +24,10 @@ public interface IUserService {
      * @return
      */
     List<User> queryUser(UserQuery query);
+
+    /**
+     * 查询签到总人数，抽奖页面展示
+     * @return
+     */
+    int queryTotalNum();
 }

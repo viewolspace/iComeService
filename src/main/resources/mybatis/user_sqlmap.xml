@@ -71,4 +71,8 @@
 
     </select>
 
+
+    <select id="queryTotalNum" resultType="int">
+        select count(1) from icome.user
+    </select>
 </mapper>

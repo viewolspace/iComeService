@@ -42,4 +42,9 @@ public class UserServiceImpl implements IUserService {
     public List<User> queryUser(UserQuery query) {
         return userDAO.queryUser(query);
     }
+
+    @Override
+    public int queryTotalNum() {
+        return userDAO.queryTotalNum();
+    }
 }

@@ -31,4 +31,9 @@ public class WinnersServiceImpl implements IWinnersService {
     public List<Winners> list() {
         return winnersDAO.list();
     }
+
+    @Override
+    public List<Winners> listByLevel(int level) {
+        return winnersDAO.listByLevel(level);
+    }
 }
