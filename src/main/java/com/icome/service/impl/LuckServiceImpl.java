@@ -90,7 +90,7 @@ public class LuckServiceImpl implements ILuckService {
 
         //从全部用户里剔除已中奖用户
         boolean flag = allList.removeAll(doneList);
-        if(!flag){
+        if(doneList.size()>0 && !flag){
             throw new ServiceException("1003", "从全部用户里剔除已中奖用户异常");
         }
 
