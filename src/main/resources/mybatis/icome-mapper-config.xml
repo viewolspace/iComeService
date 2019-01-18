@@ -17,6 +17,8 @@
         <typeAlias alias="User" type="com.icome.pojo.User"/>
         <typeAlias alias="Winners" type="com.icome.pojo.Winners"/>
         <typeAlias alias="Luck" type="com.icome.pojo.Luck"/>
+        <typeAlias alias="Program" type="com.icome.pojo.Program"/>
+        <typeAlias alias="ProgramDetail" type="com.icome.pojo.ProgramDetail"/>
     </typeAliases>
 
     <plugins>
@@ -28,6 +30,8 @@
         <mapper resource="mybatis/user_sqlmap.xml" />
         <mapper resource="mybatis/winners_sqlmap.xml" />
         <mapper resource="mybatis/luck_sqlmap.xml" />
+        <mapper resource="mybatis/program_sqlmap.xml" />
+        <mapper resource="mybatis/program_detail_sqlmap.xml" />
 
     </mappers>
 

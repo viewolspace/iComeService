@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProgramDetail">
+
+    <sql id="selectCommon">
+
+			SELECT 		ticket,
+                        program_id,
+                        create_time
+
+	</sql>
+
+    <select id="select" parameterType="string" resultType="ProgramDetail">
+        <include refid="selectCommon"/>
+        from icome.program_detail where ticket = #{ticket}
+    </select>
+
+    <insert id="insert" parameterType="ProgramDetail">
+        insert into icome.program_detail (ticket,program_id,create_time)
+        values (#{ticket},#{programId},#{createTime})
+    </insert>
+
+</mapper>
