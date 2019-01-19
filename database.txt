@@ -48,6 +48,17 @@ CREATE TABLE `program` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='节目表';
 
+insert into program (name,seq,num,create_time) values ('新奥能源',1,0,now());
+insert into program (name,seq,num,create_time) values ('新奥贸易',2,0,now());
+insert into program (name,seq,num,create_time) values ('新奥股份',3,0,now());
+insert into program (name,seq,num,create_time) values ('数能科技',4,0,now());
+insert into program (name,seq,num,create_time) values ('新择控股',5,0,now());
+insert into program (name,seq,num,create_time) values ('新智认知',6,0,now());
+insert into program (name,seq,num,create_time) values ('集团总数',7,0,now());
+
+
+
+
 
 #选项明细
 CREATE TABLE `program_detail` (
