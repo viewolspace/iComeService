@@ -68,7 +68,7 @@ public class ComeApiImpl implements IComeApi {
         json.put("access_token",temp_token);
         String result = httpPostWithJson(json,url);
         JSONObject json_ret = JSON.parseObject(result);
-        if(json_ret.getIntValue("errno")==0){
+        if(json_ret!=null && json_ret.getIntValue("errno")==0){
             return  json_ret.getJSONObject("data") ;
 
         }else{
