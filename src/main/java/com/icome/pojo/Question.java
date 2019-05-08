@@ -11,8 +11,8 @@ public class Question {
     private String userName;
     private String pic;
     private String question;
-    private int status; // 0 未回答  1 已回答
-    private int flag;   // 0 未提取  1 已提取
+    private int status; // 1 未回答  2 已回答
+    private int flag;   // 1 未提取  2 已提取
     private Date cTime;
 
 

@@ -8,8 +8,8 @@ import java.util.Map;
  */
 public class QuestionQuery {
     private Integer id ;
-    private Integer status; // 0 未回答  1 已回答
-    private Integer flag;   // 0 未提取  1 已提取
+    private Integer status; // 1 未回答  2 已回答
+    private Integer flag;   // 1 未提取  2 已提取
 
     public Integer getStatus() {
         return status;
@@ -37,10 +37,10 @@ public class QuestionQuery {
 
     public Map<String,Object> getMap(){
         Map<String,Object> map = new HashMap<>();
-        if(status!=null){
+        if(status!=null && status !=0){
             map.put("status",status);
         }
-        if(flag!=null){
+        if(flag!=null && flag!=0){
             map.put("flag",flag);
         }
         if(id!=null){

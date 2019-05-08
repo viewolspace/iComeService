@@ -11,6 +11,8 @@ import java.util.List;
 public interface IQuestionService {
     int saveQuestion(Question question);
 
+    Question getQuestion(int id);
+
     int delQuestion(int id);
 
     int updateStatus(int id,int status);

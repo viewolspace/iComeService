@@ -23,6 +23,11 @@ public class QuestionServiceImpl implements IQuestionService {
     }
 
     @Override
+    public Question getQuestion(int id) {
+        return dao.getQuestion(id);
+    }
+
+    @Override
     public int delQuestion(int id) {
         Question question = dao.getQuestion(id);
         if(question!=null){
