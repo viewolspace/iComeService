@@ -19,6 +19,8 @@
         <typeAlias alias="Luck" type="com.icome.pojo.Luck"/>
         <typeAlias alias="Program" type="com.icome.pojo.Program"/>
         <typeAlias alias="ProgramDetail" type="com.icome.pojo.ProgramDetail"/>
+        <typeAlias alias="Student" type="com.icome.pojo.Student"/>
+        <typeAlias alias="Question" type="com.icome.pojo.Question"/>
     </typeAliases>
 
     <plugins>
@@ -32,6 +34,8 @@
         <mapper resource="mybatis/luck_sqlmap.xml" />
         <mapper resource="mybatis/program_sqlmap.xml" />
         <mapper resource="mybatis/program_detail_sqlmap.xml" />
+        <mapper resource="mybatis/student_sqlmap.xml" />
+        <mapper resource="mybatis/question_sqlmap.xml" />
 
     </mappers>
 

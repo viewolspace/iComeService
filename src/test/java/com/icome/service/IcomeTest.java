@@ -19,6 +19,13 @@ public class IcomeTest extends BaseTestClass {
 
     @Test
     public void getUserDetail(){
-        System.out.println(service.getUserDetail("a82f43c9e352610aad285b0c1923514b"));
+        long stime = System.currentTimeMillis();
+
+        for(int i=0;i<1000;i++){
+            System.out.println(service.getUserDetail("6a0d818c2b4416962013f6bb5d3057c0"));
+        }
+
+        long etime = System.currentTimeMillis();
+        System.out.println(etime-stime);
     }
 }

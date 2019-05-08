@@ -68,7 +68,15 @@ public class ComeApiImpl implements IComeApi {
         json.put("access_token",temp_token);
         String result = null;
         try {
-            result = httpPostWithJson(json,url);
+            int step = 1;
+            while (true){
+                result = httpPostWithJson(json,url);
+                if(result!=null || step>3){
+                    break;
+                }
+                step = step + 1;
+            }
+
         }catch (Exception e){
             e.printStackTrace();
         }

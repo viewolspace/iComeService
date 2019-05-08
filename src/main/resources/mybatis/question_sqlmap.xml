@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Question">
+
+    <sql id="selectCommon">
+
+			SELECT 	a.id,
+                    a.user_id,
+                    b.user_name,
+                    b.position,
+                    b.school,
+                    b.pic,
+                    a.question,
+                    a.status,
+                    a.flag,
+                    a.c_time
+
+	</sql>
+
+    <insert id="insert" parameterType="Question" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO icome.question
+        (
+        user_id,
+        question,
+        status,
+        flag,
+        c_time
+        )
+        VALUES
+        (
+        #{userId},
+        #{question},
+        #{status},
+        #{flag},
+        #{cTime}
+        )
+
+    </insert>
+
+    <update id="updateStatus" parameterType="map">
+        update icome.question set status = #{status} where id = #{id}
+    </update>
+
+    <update id="updateFlag" parameterType="map">
+        update icome.question set flag = #{flag} where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from icome.question where id = #{id};
+    </delete>
+
+    <select id="select" parameterType="int" resultType="Question">
+        <include refid="selectCommon"/>
+        from icome.question a,icome.student b where a.id = #{id} and a.user_id = b.id
+    </select>
+
+
+    <select id="queryMyquestion" parameterType="int" resultType="Question">
+        <include refid="selectCommon"/>
+        from icome.question a,icome.student b where a.user_id = #{userId} and a.user_id = b.id order by a.c_time desc
+    </select>
+
+
+    <select id="queryQuestion" parameterType="map" resultType="Question">
+        <include refid="selectCommon"/>
+        from icome.question a,icome.student b
+        <where>
+            a.user_id = b.id
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="flag != null">
+                and flag = #{flag}
+            </if>
+        </where>
+        order by a.c_time desc
+    </select>
+
+
+</mapper>

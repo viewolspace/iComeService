@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Student">
+
+    <sql id="selectCommon">
+
+			SELECT 	id,
+                    user_name,
+                    pic,
+                    school,
+                    position,
+                    c_time,
+                    phone,
+                    open_id
+
+	</sql>
+
+    <insert id="insert" parameterType="Student" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO icome.student
+        (
+        user_name,
+        pic,
+        school,
+        position,
+        c_time,
+        phone,
+        open_id
+        )
+        VALUES
+        (
+        #{userName},
+        #{pic},
+        #{school},
+        #{position},
+        #{cTime},
+        #{phone},
+        #{openId}
+        )
+
+    </insert>
+
+
+    <select id="select" parameterType="int" resultType="Student">
+        <include refid="selectCommon"/>
+        from icome.Student a where id = #{id}
+    </select>
+
+    <select id="selectByThird" parameterType="string" resultType="Student">
+        <include refid="selectCommon"/>
+        from icome.Student a where open_id = #{openId}
+    </select>
+</mapper>
